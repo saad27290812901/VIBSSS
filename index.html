@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>#zombie</title>
+
+<style>
+body{
+margin:0;
+padding:0;
+background-color:black;
+color:#ff0000;
+font-family:'Courier New',Courier,monospace;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+flex-direction:column;
+position:relative;
+}
+
+.container{
+text-align:center;
+z-index:1;
+}
+
+.anime-image{
+width:554px;
+max-width:100%;
+border:3px solid #333;
+border-radius:10px;
+margin-bottom:15px;
+display:block;
+margin-left:auto;
+margin-right:auto;
+opacity:0.9;
+}
+
+.background{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+object-fit:cover;
+}
+
+.decorative-text{
+margin-top:20px;
+font-size:1rem;
+font-style:italic;
+font-weight:bold;
+text-shadow:0 0 2px #00f;
+animation:rgbColorChange 6s linear infinite;
+}
+
+@keyframes rgbColorChange{
+0%{color:rgb(255,0,0);}
+33%{color:rgb(0,255,0);}
+66%{color:rgb(0,0,255);}
+100%{color:rgb(255,0,0);}
+}
+
+pre{
+color:white;
+background-color:rgba(0,0,0,0.5);
+padding:10px;
+border-radius:15px;
+}
+</style>
+</head>
+
+<body>
+
+<video class="background" autoplay muted loop>
+<source src="https://cdn.discordapp.com/attachments/126111958574387241/1305252891518439424/-_-_2020_-_.mp4" type="video/mp4">
+</video>
+
+<div class="container">
+
+<img class="anime-image"
+src="https://gate.ahram.org.eg/Media/News/2016/8/3/2016-636058456355086121-508_main.jpg"
+alt="Hacker">
+
+<audio autoplay loop>
+<source src="https://l.top4top.io/m_3717zjadm1.mp4">
+</audio>
+
+<div class="decorative-text">
+<b>Your IP Address:</b> <span id="ip-address-value"></span><br>
+<b>IP Information:</b>
+<pre id="ip-info"></pre>
+</div>
+
+<div class="decorative-text">
+<p>You Get Hacking By #.EXE.FREAK & SHABABVIBS</p>
+<p>discord.gg/vibs</p>
+</div>
+
+</div>
+
+<script>
+
+function fetchIPAndInfo(){
+
+fetch('https://api.ipify.org/?format=json')
+.then(response => response.json())
+.then(data => {
+
+document.getElementById('ip-address-value').textContent = data.ip;
+return data.ip;
+
+})
+.then(ip => fetch(`https://ipinfo.io/${ip}/json`))
+.then(response => response.json())
+.then(ipInfoData => {
+
+document.getElementById('ip-info').textContent =
+JSON.stringify(ipInfoData, null, 2);
+
+})
+.catch(error => console.error(error));
+
+}
+
+fetchIPAndInfo();
+
+</script>
+
+</body>
+</html>
